@@ -1,7 +1,7 @@
 # Azure-REST-API
-A workspace to help developers interact with the Microsoft Azure REST API.
+A workspace to help developers interact with the Microsoft Azure REST API. Currently under active development. 
 
-*Please note that this repo is basically a replica of my public Postman workspace. You can find the workspace here: https://www.postman.com/benramins/workspace/azure-rest-api*
+*Please note that this repo is basically a replica of my public Postman workspace. For detailed documentation of each section/call, you can find the workspace here: https://www.postman.com/benramins/workspace/azure-rest-api - and the navigation of documentation is a lot easier!*
 
 /---------------------------------------------------------------------------------
 
