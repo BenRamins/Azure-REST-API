@@ -1,0 +1,476 @@
+{
+	"info": {
+		"_postman_id": "552b15af-390c-451b-92b5-c8d49d9d5fac",
+		"name": "2. Resource Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Resource Groups",
+			"item": [
+				{
+					"name": "Create Resource Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"location\": \"westeurope\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups/{resourceGroupName}?api-version=2020-06-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups",
+								"{resourceGroupName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-06-01"
+								}
+							]
+						},
+						"description": "4) Create a Resource Group\n\nThe only required field in the request body is the location you want to create your resource group in. As of the time of writing, the available locations are:\n\ncentralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest,brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth,francecentral,southafricanorth,uaenorth,australiacentral,switzerlandnorth,germanywestcentral,norwayeast,australiacentral2"
+					},
+					"response": []
+				},
+				{
+					"name": "Check Existence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups/{resourceGroupName}?api-version=2020-06-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups",
+								"{resourceGroupName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-06-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Resource Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups/{resourceGroupName}?api-version=2020-06-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups",
+								"{resourceGroupName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-06-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Resource Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups/{resourceGroupName}?api-version=2020-06-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups",
+								"{resourceGroupName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-06-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Resource Groups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups?api-version=2020-06-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-06-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resources",
+			"item": [
+				{
+					"name": "Deploy ARM Template",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"properties\": {\r\n   \"templateLink\": {\r\n     \"uri\": \"{templateLinkUri}\",\r\n     \"contentVersion\": \"1.0.0.0\"\r\n   },\r\n   \"parametersLink\": {\r\n     \"uri\": \"{parametersLinkUri}\",\r\n     \"contentVersion\": \"1.0.0.0\"\r\n   },\r\n   \"mode\": \"Incremental\"\r\n }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}?api-version=2019-10-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups",
+								"{resourceGroupName}",
+								"providers",
+								"Microsoft.Resources",
+								"deployments",
+								"{deploymentName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2019-10-01"
+								}
+							]
+						},
+						"description": "If you're comfortable with Azure Resource Manager (ARM) templates (whether you're using other developers' or your own) you can use this request, for literally creating any resource you want. It will just follow the schema/settings specified in the deployment/parameters uri. \r\n\r\nIf you are going to use the same templates over and over, might be a good idea to add them to your environment. I left them out of the environment here on purpose. \r\n\r\nThe {deploymentName} in the url can be whatever you want, this only makes the deployment identifiable. \r\n\r\nIf you're not comfortable with ARM, I included some requests for what I think are most-often-used cases where the settings are defined inline. "
+					},
+					"response": []
+				},
+				{
+					"name": "Create General Storage Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"properties\": {\r\n   \"mode\": \"Incremental\",\r\n   \"template\": {\r\n     \"$schema\": \"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\r\n     \"contentVersion\": \"1.0.0.0\",\r\n     \"parameters\": {\r\n       \"storageAccountType\": {\r\n         \"type\": \"string\",\r\n         \"defaultValue\": \"Standard_LRS\",\r\n         \"allowedValues\": [\r\n           \"Standard_LRS\",\r\n           \"Standard_GRS\",\r\n           \"Standard_ZRS\",\r\n           \"Premium_LRS\"\r\n         ],\r\n         \"metadata\": {\r\n           \"description\": \"Storage Account type\"\r\n         }\r\n       },\r\n       \"location\": {\r\n         \"type\": \"string\",\r\n         \"defaultValue\": \"[resourceGroup().location]\",\r\n         \"metadata\": {\r\n           \"description\": \"Location for all resources.\"\r\n         }\r\n       }\r\n     },\r\n     \"variables\": {\r\n       \"storageAccountName\": \"uniquestoragename\" // must be universally unique and only include small letters and numbers\r\n     },\r\n     \"resources\": [\r\n       {\r\n         \"type\": \"Microsoft.Storage/storageAccounts\",\r\n         \"apiVersion\": \"2018-02-01\",\r\n         \"name\": \"[variables('storageAccountName')]\",\r\n         \"location\": \"[parameters('location')]\",\r\n         \"sku\": {\r\n           \"name\": \"[parameters('storageAccountType')]\"\r\n         },\r\n         \"kind\": \"StorageV2\",\r\n         \"properties\": {}\r\n       }\r\n     ],\r\n     \"outputs\": {\r\n       \"storageAccountName\": {\r\n         \"type\": \"string\",\r\n         \"value\": \"[variables('storageAccountName')]\"\r\n       }\r\n     }\r\n   }\r\n }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}?api-version=2019-10-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourcegroups",
+								"{resourceGroupName}",
+								"providers",
+								"Microsoft.Resources",
+								"deployments",
+								"{deploymentName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2019-10-01"
+								}
+							]
+						},
+						"description": "The {deploymentName} in the url can be whatever you want, this only makes the deployment identifiable. \r\n\r\nThe one thing you have to input in the body is the storageAccountName. It must be universally unique (so if someone else has taken that name on Azure, it won't work) and only include small letters and numbers, no characters. You can use a UUID generator or be creative with the naming.\r\n \r\nThe location of the storage account will follow the location of the parent resource group, but you can change that. For example, the resource group could be eastus, but you specify that the storage account should be in westeurope, etc. "
+					},
+					"response": []
+				},
+				{
+					"name": "Create SQL Server",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"properties\": {\r\n    \"administratorLogin\": \"dummylogin\",\r\n    \"administratorLoginPassword\": \"<administratorLoginPassword>\"\r\n  },\r\n  \"location\": \"West Europe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}?api-version=2019-06-01-preview",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourceGroups",
+								"{resourceGroupName}",
+								"providers",
+								"Microsoft.Sql",
+								"servers",
+								"{serverName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2019-06-01-preview"
+								}
+							]
+						},
+						"description": "This is a bit of a funky one, and it depends on your Azure account tier. \r\n\r\nIf you just signed up for a free account with Azure, Microsoft.Sql as a resource provider is probably not registered in your account yet. If you try to run this request, you'll probably get the following error: \"The subscription is not registered to use namespace 'Microsoft.Sql' \" \r\n\r\nIf this happens, follow the steps outlined here to resolve this error: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/error-register-resource-provider  \r\n\r\n/----------------------------------------\r\n\r\n{serverName} needs to be universally unique. Can include dashes. \r\n\r\nChange the administrator login and password to whatever you like. But save this information. If you use GET server or list servers, you won't get admin password back... \r\n\r\nYou also need to specify the location of the server"
+					},
+					"response": []
+				},
+				{
+					"name": "Create SQL Database",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"location\": \"westeurope\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}?api-version=2019-06-01-preview",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resourceGroups",
+								"{resourceGroupName}",
+								"providers",
+								"Microsoft.Sql",
+								"servers",
+								"{serverName}",
+								"databases",
+								"{databaseName}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2019-06-01-preview"
+								}
+							]
+						},
+						"description": "This creates an SQL database in an existing SQL server. You have to specify the SQL server name + your desired database name in the request URL. \r\n\r\nThis call uses the absolute minimum requirements for creating a database. For more options, refer to the Azure documentation. \r\n\r\n{databaseName} can be whatever you want. "
+					},
+					"response": []
+				},
+				{
+					"name": "List Resources",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionID}}/resources?api-version=2020-06-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionID}}",
+								"resources"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-06-01"
+								}
+							]
+						},
+						"description": "This call lists all the resources that exist in a subscription, across all resources groups. "
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

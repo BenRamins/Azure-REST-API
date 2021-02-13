@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "e47b30e0-24e3-431c-808c-0aae73fa80ef",
+		"name": "1. Setup and Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Bearer Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearerToken\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "https://management.azure.com/",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/{{tenantID}}/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"{{tenantID}}",
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "Get a bearer token\n\nRun the \"Get Bearer Token\" request. Everything has been set up, so if you had set up your environment variables as described in the general workspace description above, you should be good to go.\n\nOnce you send the request, the test script in the request will assign a token value to the bearerToken variable in your environment.\n\nYou will need this token for any call you make to the REST API. If you ever get a 401 response in any subsequent call in this collection, the token has most likely expired and you need to run this request again to get a new token."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

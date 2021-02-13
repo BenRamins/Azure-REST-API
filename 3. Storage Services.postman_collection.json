@@ -1,0 +1,532 @@
+{
+	"info": {
+		"_postman_id": "2718c1c7-c392-4f35-967a-2c7727bcb14c",
+		"name": "3. Storage Services",
+		"description": "This collection uses a different Get Bearer Token call, titled \"Get Storage Bearer Token\". It's important that you don't mix the two bearer tokens in the environment up. ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Blob Service",
+			"item": [
+				{
+					"name": "Operations on Account",
+					"item": [
+						{
+							"name": "List Containers",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"time\", new Date().toUTCString())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{storageBearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-ms-version",
+										"value": "2017-11-09",
+										"type": "text"
+									},
+									{
+										"key": "x-ms-date",
+										"value": "{{time}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{storageaccountname}.blob.core.windows.net/?comp=list",
+									"protocol": "https",
+									"host": [
+										"{storageaccountname}",
+										"blob",
+										"core",
+										"windows",
+										"net"
+									],
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "comp",
+											"value": "list"
+										}
+									]
+								},
+								"description": "This call lists all the blob containers in a specific storage account. \r\n\r\nThere is a pre-request script that's quite critical, as x-ms-date header is required by Azure in a specific format. "
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Operations on Containers",
+					"item": [
+						{
+							"name": "Create Container",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"time\", new Date().toUTCString())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{storageBearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-ms-version",
+										"value": "2017-11-09",
+										"type": "text"
+									},
+									{
+										"key": "x-ms-date",
+										"value": "{{time}}",
+										"type": "text"
+									},
+									{
+										"key": "x-ms-blob-public-access",
+										"value": "container",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "x-ms-blob-public-access",
+										"value": "blob",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://{storageaccountname}.blob.core.windows.net/{containername}?restype=container",
+									"protocol": "https",
+									"host": [
+										"{storageaccountname}",
+										"blob",
+										"core",
+										"windows",
+										"net"
+									],
+									"path": [
+										"{containername}"
+									],
+									"query": [
+										{
+											"key": "restype",
+											"value": "container"
+										}
+									]
+								},
+								"description": "This call creates a container the specified storage account. Specify container name in the URL. Duplicate container names are not allowed. \r\n\r\nThis call creates the container with the default settings. \r\n\r\nHowever, you have the option to include an extra optional header, x-ms-blob-public-access of two different values, container and blob. Just select the one you want. If you don't include this header, the access will be set to private by default. "
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Container",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"time\", new Date().toUTCString())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{storageBearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-ms-version",
+										"value": "2017-11-09",
+										"type": "text"
+									},
+									{
+										"key": "x-ms-date",
+										"value": "{{time}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{storageaccountname}.blob.core.windows.net/{containername}?restype=container",
+									"protocol": "https",
+									"host": [
+										"{storageaccountname}",
+										"blob",
+										"core",
+										"windows",
+										"net"
+									],
+									"path": [
+										"{containername}"
+									],
+									"query": [
+										{
+											"key": "restype",
+											"value": "container"
+										}
+									]
+								},
+								"description": "As per the Azure documentation, this call marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection. But if you refresh the storage account in the portal, the container will be gone from the list. \r\n\r\nPlease note that if you're a bit more advanced and tweaking around with leases, if the container has an active lease, you will need to include the header x-ms-lease-id, as we're using a version newer than version 2012-02-12."
+							},
+							"response": []
+						},
+						{
+							"name": "List Blobs",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"time\", new Date().toUTCString())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{storageBearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-ms-version",
+										"type": "text",
+										"value": "2017-11-09"
+									},
+									{
+										"key": "x-ms-date",
+										"type": "text",
+										"value": "{{time}}"
+									}
+								],
+								"url": {
+									"raw": "https://{storageaccountname}.blob.core.windows.net/{containername}?restype=container&comp=list",
+									"protocol": "https",
+									"host": [
+										"{storageaccountname}",
+										"blob",
+										"core",
+										"windows",
+										"net"
+									],
+									"path": [
+										"{containername}"
+									],
+									"query": [
+										{
+											"key": "restype",
+											"value": "container"
+										},
+										{
+											"key": "comp",
+											"value": "list"
+										}
+									]
+								},
+								"description": "This call returns a list of the blobs under the specified container. "
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Operations on Blobs",
+					"item": [
+						{
+							"name": "Put Blob (file)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"time\", new Date().toUTCString())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{storageBearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-ms-version",
+										"type": "text",
+										"value": "2017-11-09"
+									},
+									{
+										"key": "x-ms-date",
+										"type": "text",
+										"value": "{{time}}"
+									},
+									{
+										"key": "x-ms-blob-type",
+										"value": "BlockBlob",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "*.mp4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": ""
+									}
+								},
+								"url": {
+									"raw": "https://{storageaccountname}.blob.core.windows.net/{containername}/{blobname}.mp4",
+									"protocol": "https",
+									"host": [
+										"{storageaccountname}",
+										"blob",
+										"core",
+										"windows",
+										"net"
+									],
+									"path": [
+										"{containername}",
+										"{blobname}.mp4"
+									]
+								},
+								"description": "This call creates a blob in the specified storage account. \r\nAs mentioned earlier in the documentation, this call is designed for a BlockBlob only. \r\n\r\nAlso note that the body of the request cannot be empty, otherwise the request will hang. \r\n\r\nThis specific call uploads a file through binary input in the body. Just go to \"body\", select \"binary\", and select your desired file from your local machine. \r\n\r\nYou should also specify the content-type in the headers to match your file type. As an example, this call is designed to upload a .mp4 file"
+							},
+							"response": []
+						},
+						{
+							"name": "Put Blob (text/plain)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"time\", new Date().toUTCString())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{storageBearerToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-ms-version",
+										"type": "text",
+										"value": "2017-11-09"
+									},
+									{
+										"key": "x-ms-date",
+										"type": "text",
+										"value": "{{time}}"
+									},
+									{
+										"key": "x-ms-blob-type",
+										"value": "BlockBlob",
+										"type": "text"
+									},
+									{
+										"key": "Content-Length",
+										"value": "11",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "hello world"
+								},
+								"url": {
+									"raw": "https://{storageaccountname}.blob.core.windows.net/{containername}/{blobname}",
+									"protocol": "https",
+									"host": [
+										"{storageaccountname}",
+										"blob",
+										"core",
+										"windows",
+										"net"
+									],
+									"path": [
+										"{containername}",
+										"{blobname}"
+									]
+								},
+								"description": "For the sake of consistency, this call duplicates the one mentioned in the Azure documentation. You don't need to specify a content-type but you DO need to specify content-length. In the example of \"hello world\", content length is 11, etc. \r\n\r\nThis call creates a blob in the specified storage account. \r\nAs mentioned earlier in the documentation, this call is designed for a BlockBlob only. \r\n\r\nAlso note that the body of the request cannot be empty, otherwise the request will hang. \r\n\r\nThis specific call uploads the text included in the body under the \"raw\" option with \"text\". \r\n\r\n"
+							},
+							"response": []
+						}
+					],
+					"description": "For the purposes of this particular collection, only BlockBlobs are considered. \r\nPlease note that there are other types. I am only including BlockBlob since I believe it has higher number of use cases. But, this collection will be updated in the future to account for all types. ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get Storage Bearer Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"storageBearerToken\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "https://storage.azure.com/",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/{{tenantID}}/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"{{tenantID}}",
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "The only difference between this call and the Get Bearer Token call is the resource. \n\nOnce you send the request, the test script in the request will assign a token value to the storageBearerToken variable in your environment.\n\nYou will need this token for any call you make to the storage REST API. If you ever get a response in the 4xx range in any subsequent call in this collection, the token has most likely expired and you need to run this request again to get a new token.\n\nAgain, this bearer token is specific for Azure storage. "
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
